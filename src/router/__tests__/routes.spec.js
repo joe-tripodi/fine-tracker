@@ -13,4 +13,10 @@ describe("Router has correct routes", () => {
       routes.filter((route) => route.path == "/home").length
     ).toBeGreaterThan(0);
   });
+
+  test("has /club-fines route", () => {
+    expect(
+      routes.filter((route) => route.path == "/club-fines").length
+    ).toBeGreaterThan(0);
+  })
 });

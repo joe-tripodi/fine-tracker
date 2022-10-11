@@ -11,21 +11,16 @@ const routes = [
     name: "home",
     component: () => import("../views/HomeView.vue"),
   },
+  {
+    path: "/club-fines",
+    name: "club-fines",
+    component: () => import("../views/ClubFines.vue"),
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: () => import("../views/HomeView.vue"),
-    },
-    {
-      path: "/home",
-      component: () => import("../views/HomeView.vue"),
-    },
-  ],
+  routes: routes,
 });
 
 export { routes };
