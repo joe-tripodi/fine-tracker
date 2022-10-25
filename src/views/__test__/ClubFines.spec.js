@@ -34,18 +34,6 @@ describe('Club Fines', () => {
     expect(wrapper.exists()).toBeTruthy();
   })
 
-  it('contains a header with the correct header', () => {
-    const wrapper = shallowMount(ClubFines, {
-      global: {
-        provide: {
-          database: new Database()
-        }
-      }
-    });
-    expect(wrapper.find('h1').exists()).toBeTruthy();
-    expect(wrapper.find('h1').html()).toContain('Club Fines');
-  })
-
   it('renders a club fine with an amount', async () => {
     const wrapper = mount(ClubFines, {
       global: {
@@ -74,6 +62,21 @@ describe('Club Fines', () => {
     expect(wrapper.html()).toContain('$5');
     expect(wrapper.html()).toContain('Late to game')
     expect(wrapper.html()).toContain('$50');
+  })
+
+  it('can search the fines', async () => {
+    const wrapper = mount(ClubFines, {
+      global: {
+        provide: {
+          database: new Database()
+        }
+      }
+    });
+    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick();
+    await wrapper.get("#search").setValue("training");
+    expect(wrapper.html()).toContain("Late to training")
+    expect(wrapper.html().includes("Late to game")).toBeFalsy();
   })
 
 })
