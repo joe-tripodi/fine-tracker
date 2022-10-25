@@ -1,18 +1,30 @@
 <template>
-  <div class="ml-5 mt-5" v-if="isDataLoaded">
-    <table class="table is-striped">
-      <thead>
-        <tr>
-          <th>Reason <input id="search" placeholder="...Search" v-model="reasonSearchText"> </th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="fine, index in searchedFines" :key="index">
-          <ClubFine :fine="fine"></ClubFine>
-        </tr>
-      </tbody>
-    </table>
+  <div class="ml-5 mt-5 mr-5 mb-5" v-if="isDataLoaded">
+    <div class="columns">
+      <div class="column">
+        <div class="column is-one-fifth is-pulled-left">
+          <span class="control has-icons-left ">
+            <input id="search" class="input is-rounded" placeholder="Search..." v-model="reasonSearchText">
+            <span class="icon is-small is-left">
+              <fa icon="fas fa-search"></fa>
+            </span>
+          </span>
+        </div> 
+        <table class="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th>Reason</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="fine, index in searchedFines" :key="index">
+              <ClubFine :fine="fine"></ClubFine>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 

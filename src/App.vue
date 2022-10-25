@@ -1,11 +1,18 @@
 <template>
   <div class="navbar is-white has-shadow" role="navigation" aria-label="main-navigation">
-    <div class="navbar-menu is-active">
+    <div class="navbar-brand">
+      <a role="button" @click="toggleIsActive()" class="navbar-burger" aria-label="menu" aria-expanded="false" :class="active ? 'is-active' : ''">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    </div>
+    <div class="navbar-menu" :class="active ? 'is-active' : ''">
       <div class="navbar-start">
-        <RouterLink class="navbar-item has-text-black" to="/">Home</RouterLink>
-        <RouterLink class="navbar-item has-text-black" to="/clubfines">Club Fines</RouterLink>
-        <RouterLink class="navbar-item has-text-black" to="/playerfines">Fines</RouterLink>
-        <RouterLink class="navbar-item has-text-black" to="/statistics">Statistics</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/">Home</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/clubfines">Club Fines</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/playerfines">Fines</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/statistics">Statistics</RouterLink>
       </div>
     </div>
   </div>
@@ -13,6 +20,21 @@
     <RouterView></RouterView>
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue';
+
+const active = ref(false)
+
+function toggleIsActive(){
+  active.value = !active.value;
+}
+
+function closeBurgerMenu(){
+  active.value = false;
+}
+
+</script>
 
 <style>
 @import 'bulma/css/bulma.css';
