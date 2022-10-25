@@ -2,10 +2,10 @@
   <div class="navbar is-white has-shadow" role="navigation" aria-label="main-navigation">
     <div class="navbar-brand">
       <a role="button" @click="toggleIsActive()" class="navbar-burger" aria-label="menu" aria-expanded="false" :class="active ? 'is-active' : ''">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
     <div class="navbar-menu" :class="active ? 'is-active' : ''">
       <div class="navbar-start">
