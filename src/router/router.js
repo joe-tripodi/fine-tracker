@@ -12,15 +12,26 @@ const routes = [
     component: () => import("../views/HomeView.vue"),
   },
   {
-    path: "/club-fines",
-    name: "club-fines",
+    path: "/clubfines",
+    name: "clubfines",
     component: () => import("../views/ClubFines.vue"),
   },
+  {
+    path: "/playerfines",
+    name: "playerfines",
+    component: () => import("../views/PlayerFines.vue"),
+  },
+  {
+    path: "/statistics",
+    name: "statistics",
+    component: () => import("../views/FineStatistics.vue"),
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes: routes,
+  linkActiveClass: 'has-background-light'
 });
 
 export { routes };
