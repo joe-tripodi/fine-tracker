@@ -4,7 +4,8 @@ describe("Navigation bar", () => {
     cy.visit("/");
     cy.get(".navbar-start").contains("Home");
     cy.get(".navbar-start").contains("Club Fines");
-    cy.get(".navbar-start").contains("Fines");
+    cy.get(".navbar-start").contains("Player Fines");
+    cy.get(".navbar-start").contains("Players");
     cy.get(".navbar-start").contains("Statistics");
   });
 

@@ -46,4 +46,11 @@ describe("Router has correct routes", () => {
     expect(statisticsRoute.component()).toBeTruthy();
   })
 
+  test("it contains the route and component for Players", () => {
+    let playersRoute = router.options.routes.filter((route) => route.path == "/players")[0];
+    expect(playersRoute.path).toBe("/players");
+    expect(playersRoute.name).toBe("players");
+    expect(playersRoute.component()).toBeTruthy();
+  })
+
 });
