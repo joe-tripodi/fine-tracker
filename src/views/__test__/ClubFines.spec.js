@@ -5,6 +5,15 @@ import { describe, it, expect } from 'vitest'
 import { mount, shallowMount } from '@vue/test-utils'
 import ClubFines from '../ClubFines.vue'
 
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+/* import specific icons */
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+library.add(fas);
+
 const Database = class {
   clubFines = [
     {
@@ -28,7 +37,8 @@ describe('Club Fines', () => {
       global: {
         provide: {
           database: new Database()
-        }
+        },
+        stubs: { "fa": FontAwesomeIcon }
       }
     });
     expect(wrapper.exists()).toBeTruthy();
@@ -39,7 +49,8 @@ describe('Club Fines', () => {
       global: {
         provide: {
           database: new Database()
-        }
+        },
+        stubs: { "fa": FontAwesomeIcon }
       }
     });
     await wrapper.vm.$nextTick();
@@ -53,7 +64,8 @@ describe('Club Fines', () => {
       global: {
         provide: {
           database: new Database()
-        }
+        },
+        stubs: { "fa": FontAwesomeIcon }
       }
     });
     await wrapper.vm.$nextTick()
@@ -69,7 +81,8 @@ describe('Club Fines', () => {
       global: {
         provide: {
           database: new Database()
-        }
+        },
+        stubs: { "fa": FontAwesomeIcon }
       }
     });
     await wrapper.vm.$nextTick()
