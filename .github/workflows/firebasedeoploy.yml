@@ -5,6 +5,8 @@ name: Deploy to Firebase Hosting on successful automated testing
 'on':
   workflow_run:
     workflows: ["automated testing"]
+    types:
+      - completed
     
 jobs:
   build_and_deploy:
