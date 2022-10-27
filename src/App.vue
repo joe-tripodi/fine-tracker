@@ -39,6 +39,8 @@ function closeBurgerMenu(){
 
 <style>
 @import 'bulma/css/bulma.css';
+@import 'bulma-floating-button/dist/css/bulma-floating-button.min.css';
+
 .navbar-item:hover{
   background-color: white !important;
   text-decoration: underline;

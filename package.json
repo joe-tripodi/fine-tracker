@@ -15,6 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "bulma": "^0.9.4",
+    "bulma-floating-button": "^1.0.3",
     "firebase": "^9.12.1",
     "happy-dom": "^7.6.0",
     "pinia": "^2.0.21",

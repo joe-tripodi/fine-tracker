@@ -25,13 +25,22 @@
         </table>
       </div>
     </div>
+    <a @click="showClubFineModal" class="button is-floating is-dark is-small">
+       <fa icon="fas fa-add"></fa>
+    </a>
+    <AddClubFineModal @closeAddClubFineModal="closeAddClubFineModal"  :isActive="isActive"></AddClubFineModal>
   </div>
+
+  
+
 </template>
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
 import ClubFine from '../components/ClubFine.vue';
+import AddClubFineModal from '../modals/AddClubFineModal.vue'
 
+const isActive = ref(false);
 const database = inject('database');
 const allClubFines = ref([]);
 const isDataLoaded = ref(false);
@@ -41,6 +50,14 @@ const searchedFines = computed(() => {
   const filteredFines = allClubFines.value.filter((fine) => fine.reason.toLowerCase().includes(reasonSearchText.value.toLowerCase()));
   return filteredFines;
 })
+
+function showClubFineModal(){
+  isActive.value = true;
+}
+
+function closeAddClubFineModal(){
+  isActive.value = false;
+}
 
 onMounted(async () => {
   allClubFines.value = await database.getAllClubFines();

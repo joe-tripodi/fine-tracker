@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
-import { collection, getDocs } from "@firebase/firestore";
+import { collection, getDocs, addDoc } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJgWeRp82eZmVTK6UzTb4COjvn1QBhSJw",
@@ -20,9 +20,15 @@ export default  {
   getAllClubFines: async () => {
     let fines = []
     const querySnapshot = await getDocs(collection(database, "clubfines"));
-    querySnapshot.forEach((doc) => {
-      fines.push(doc.data());
+    querySnapshot.forEach((fine) => {
+      fines.push(fine.data());
     })
     return fines;
+  },
+  addClubFine: async (reason, amount) => {
+    await addDoc(collection(database, "clubfines"), {
+      reason: reason,
+      amount: amount,
+    });
   }
 }
