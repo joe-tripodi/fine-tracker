@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
-    "test:unit": "vitest --environment happy-dom --coverage",
+    "test:unit": "vitest --environment happy-dom",
     "test:e2e": "start-server-and-test preview http://localhost:4173/ 'cypress open --e2e'",
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
@@ -15,6 +15,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "bulma": "^0.9.4",
+    "bulma-floating-button": "^1.0.3",
     "firebase": "^9.12.1",
     "happy-dom": "^7.6.0",
     "pinia": "^2.0.21",

@@ -25,6 +25,9 @@
         </table>
       </div>
     </div>
+    <a @click="showClubFineModal" class="button is-floating is-dark is-small floating-add">
+       <fa icon="fas fa-add"></fa>
+    </a>
     <AddClubFineModal @closeAddClubFineModal="closeAddClubFineModal" :isActive="isActive" ></AddClubFineModal>
   </div>
 </template>
@@ -48,6 +51,10 @@ const searchedFines = computed(() => {
 
 function closeAddClubFineModal(){
   isActive.value = false;
+}
+
+function showClubFineModal(){
+  isActive.value = true;
 }
 
 onMounted(async () => {

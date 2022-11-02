@@ -76,11 +76,29 @@ describe('Club Fines', () => {
         stubs: ["fa"]
       }
     });
-    await wrapper.vm.$nextTick()
+    await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
     await wrapper.get("#search").setValue("training");
     expect(wrapper.html()).toContain("Late to training")
     expect(wrapper.html().includes("Late to game")).toBeFalsy();
   })
 
+})
+
+describe("Floating add button", () => {
+  it("contains an add button", async () => {
+    const wrapper = mount(ClubFines, {
+      global: {
+        provide: {
+          database: new Database()
+        },
+        stubs: ["fa"]
+      }
+    });
+
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find(".floating-add").exists()).toBeTruthy();
+  })
 })
