@@ -428,4 +428,21 @@ describe("add button", () => {
 
 })
 
+describe("closes when background is pressed", () => {
+  it("closes when the background is pressed by emitting closeAddClubFineModal", async () => {
+    const wrapper = shallowMount(AddClubFineModal, {
+      global: {
+        stubs: ["fa"],
+        provide: {
+          database: new Database(),
+        },
+      },
+    });
+
+    await wrapper.find(".modal-background").trigger("click");
+    expect(wrapper.emitted()).toHaveProperty("closeAddClubFineModal");
+
+  })
+})
+
 
