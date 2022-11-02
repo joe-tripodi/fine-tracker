@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
-import { collection, getDocs } from "@firebase/firestore";
+import { addDoc, collection, getDocs } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAJgWeRp82eZmVTK6UzTb4COjvn1QBhSJw",
@@ -24,5 +24,20 @@ export default  {
       fines.push(doc.data());
     })
     return fines;
+  },
+  clubFineExists: async (reason) => {
+    let fines = []
+    const querySnapshot = await getDocs(collection(database, "clubfines"));
+    querySnapshot.forEach((doc) => {
+      fines.push(doc.data());
+    })
+    let filteredFines = fines.filter((fine) => fine.reason.toLowerCase() == reason.toLowerCase());
+    return filteredFines.length > 0;
+  },
+  addClubFine: async (reason, amount) => {
+    await addDoc(collection(database, "clubfines"), {
+      reason: reason,
+      amount: amount,
+    });
   }
 }
