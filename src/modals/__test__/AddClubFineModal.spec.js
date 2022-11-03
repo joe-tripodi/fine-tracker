@@ -232,6 +232,7 @@ describe("cancel button", () => {
     const cancelButton = wrapper.find(".cancel");
     await cancelButton.trigger("click");
     expect(wrapper.emitted()).toHaveProperty("closeAddClubFineModal");
+    expect(wrapper.emitted().closeAddClubFineModal[0][0]).toBeFalsy();
   })
 
   it("clears the text when cancel is pressed", async () => {
@@ -280,6 +281,7 @@ describe("delete button (menu button)", () => {
 
     await wrapper.find(".delete").trigger("click");
     expect(wrapper.emitted()).toHaveProperty("closeAddClubFineModal");
+    expect(wrapper.emitted().closeAddClubFineModal[0][0]).toBeFalsy();
   })
 
   it("clears the text when cancel is pressed", async () => {
@@ -330,6 +332,7 @@ describe("add button", () => {
     await wrapper.find(".add").trigger("click");
     
     expect(wrapper.emitted()).toHaveProperty("closeAddClubFineModal");
+    expect(wrapper.emitted().closeAddClubFineModal[0]).toBeTruthy()
   })
 
   it("does not emit closeAddClubFineModal when reason input is invalid", async () => {
@@ -441,7 +444,6 @@ describe("closes when background is pressed", () => {
 
     await wrapper.find(".modal-background").trigger("click");
     expect(wrapper.emitted()).toHaveProperty("closeAddClubFineModal");
-
   })
 })
 

@@ -70,7 +70,7 @@ function cleanTheForm(){
 
 function closeModal(){
   cleanTheForm();
-  emit("closeAddClubFineModal");
+  emit("closeAddClubFineModal", false);
 }
 
 async function addClubFine(){
@@ -78,7 +78,7 @@ async function addClubFine(){
   if(isValidForm() && fineDoesNotExist){
     await database.addClubFine(reasonForFine.value, +fineAmount.value);
     cleanTheForm();
-    emit("closeAddClubFineModal");
+    emit("closeAddClubFineModal", true);
   }
 }
 

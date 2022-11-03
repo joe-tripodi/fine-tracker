@@ -49,7 +49,10 @@ const searchedFines = computed(() => {
   return filteredFines;
 })
 
-function closeAddClubFineModal(){
+async function closeAddClubFineModal(fineCretaed){
+  if(fineCretaed){
+    allClubFines.value = await database.getAllClubFines();
+  }
   isActive.value = false;
 }
 
