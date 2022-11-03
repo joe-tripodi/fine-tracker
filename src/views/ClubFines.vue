@@ -25,7 +25,7 @@
         </table>
       </div>
     </div>
-    <a @click="showClubFineModal" class="button is-floating is-dark is-small floating-add">
+    <a @click="showClubFineModal" class="button is-floating is-dark is-small" id="floating-add">
        <fa icon="fas fa-add"></fa>
     </a>
     <AddClubFineModal @closeAddClubFineModal="closeAddClubFineModal" :isActive="isActive" ></AddClubFineModal>

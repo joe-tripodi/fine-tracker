@@ -24,7 +24,7 @@
             <span class="icon is-small is-left">
               <fa icon="fas fa-dollar"></fa>
             </span>
-            <input id="fineAmount" v-model="fineAmount" class="input" type="number" placeholder="Enter an amount.." >
+            <input @keyup.enter="addClubFine" id="fineAmount" v-model="fineAmount" class="input" type="number" placeholder="Enter an amount.." >
           </div>
         </div>
 

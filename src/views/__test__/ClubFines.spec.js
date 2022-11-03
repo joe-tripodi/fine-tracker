@@ -99,6 +99,6 @@ describe("Floating add button", () => {
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.find(".floating-add").exists()).toBeTruthy();
+    expect(wrapper.find("#floating-add").exists()).toBeTruthy();
   })
 })
