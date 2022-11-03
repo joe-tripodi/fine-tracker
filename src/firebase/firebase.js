@@ -39,5 +39,13 @@ export default  {
       reason: reason,
       amount: amount,
     });
+  },
+  getAllPlayers: async () => {
+    let players = []
+    const querySnapshot = await getDocs(collection(database, "players"));
+    querySnapshot.forEach((doc) => {
+      players.push(doc.data());
+    })
+    return players;
   }
 }
