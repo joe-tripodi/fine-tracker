@@ -1,5 +1,5 @@
 <template>
-  <div class="ml-5 mt-5 mr-5 mb-5" v-if="isDataLoaded">
+  <div class="ml-5 mr-5 mb-5" v-if="isDataLoaded">
     <div class="columns">
       <div class="column">
         <div class="column is-one-fifth is-pulled-left">
