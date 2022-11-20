@@ -2,14 +2,6 @@
   <div class="ml-5 mr-5 mb-5" v-if="isDataLoaded">
     <div class="columns">
       <div class="column">
-        <div class="column is-one-fifth is-pulled-left">
-          <span class="control has-icons-left ">
-            <input id="search" class="input is-rounded" placeholder="Search..." v-model="reasonSearchText">
-            <span class="icon is-small is-left">
-              <fa icon="fas fa-search"></fa>
-            </span>
-          </span>
-        </div> 
         <table class="table is-striped is-fullwidth">
           <thead>
             <tr>

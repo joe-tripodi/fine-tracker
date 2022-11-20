@@ -48,22 +48,6 @@ describe("Players View", () => {
     expect(wrapper.html()).toContain("Stefan Didone");
     expect(wrapper.html()).toContain("Joe Poll");
   })
-
-  it('can search the players', async () => {
-    const wrapper = mount(PlayersView, {
-      global: {
-        provide: {
-          database: new Database()
-        },
-        stubs: ["fa"]
-      }
-    });
-    await wrapper.vm.$nextTick();
-    await wrapper.vm.$nextTick();
-    await wrapper.get("#search").setValue("Stefan");
-    expect(wrapper.html()).toContain("Stefan Didone")
-    expect(wrapper.html().includes("Joe Poll")).toBeFalsy();
-  })
 })
 
 describe("Floating add button", () => {

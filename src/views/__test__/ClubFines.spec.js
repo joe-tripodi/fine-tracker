@@ -66,23 +66,6 @@ describe('Club Fines', () => {
     expect(wrapper.html()).toContain('Late to game')
     expect(wrapper.html()).toContain('$50');
   })
-
-  it('can search the fines', async () => {
-    const wrapper = mount(ClubFines, {
-      global: {
-        provide: {
-          database: new Database()
-        },
-        stubs: ["fa"]
-      }
-    });
-    await wrapper.vm.$nextTick();
-    await wrapper.vm.$nextTick();
-    await wrapper.get("#search").setValue("training");
-    expect(wrapper.html()).toContain("Late to training")
-    expect(wrapper.html().includes("Late to game")).toBeFalsy();
-  })
-
 })
 
 describe("Floating add button", () => {
