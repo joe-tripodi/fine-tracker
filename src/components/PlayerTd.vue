@@ -1,5 +1,5 @@
 <template>
-  <td>{{props.player.firstName}} {{props.player.lastName}}</td>
+  <td>{{props.player.firstName}} {{props.player.lastName}} #{{player.shirtNumber}}</td>
 </template>
 
 <script setup>
