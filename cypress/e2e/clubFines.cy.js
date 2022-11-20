@@ -3,6 +3,5 @@ describe("Club fines", () => {
     cy.viewport('macbook-13');
     cy.visit("/");
     cy.get(".navbar-item").contains("Club Fines").click();
-    cy.get("#search");
   })
 });

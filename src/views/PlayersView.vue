@@ -4,7 +4,7 @@
       <div class="column">
         <table class="table is-striped is-fullwidth">
           <tbody>
-            <tr v-for="player, index in searchedPlayers" :key="index">
+            <tr v-for="player, index in allPlayersSortedByFirstName" :key="index">
               <PlayerTd :player="player"></PlayerTd>
             </tr>
           </tbody>
@@ -21,7 +21,6 @@
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
-import PlayerService from '../services/player.js';
 
 import PlayerTd from '../components/PlayerTd.vue';
 import AddPlayerModal from '../modals/AddPlayerModal.vue';
@@ -29,12 +28,10 @@ import AddPlayerModal from '../modals/AddPlayerModal.vue';
 const database = inject('database');
 const allPlayers = ref([]);
 const isDataLoaded = ref(false);
-const playerSearchText = ref('');
 const isActive = ref(false);
 
-const searchedPlayers = computed(() => {
-  const filteredPlayers = allPlayers.value.filter((player) => PlayerService.playerDataContainsText(player, playerSearchText.value.toLowerCase()));
-  return filteredPlayers.sort((playerA, playerB) => playerA.firstName > playerB.firstName ? 1 : -1);
+const allPlayersSortedByFirstName = computed(() => {
+  return allPlayers.value.sort((playerA, playerB) => playerA.firstName > playerB.firstName ? 1 : -1);
 })
 
 async function closeAddPlayerModal(playerCreated){
