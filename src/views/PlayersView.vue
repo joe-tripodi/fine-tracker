@@ -29,6 +29,7 @@
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
+import PlayerService from '../services/player.js';
 
 import PlayerTd from '../components/PlayerTd.vue';
 import AddPlayerModal from '../modals/AddPlayerModal.vue';
@@ -40,7 +41,7 @@ const playerSearchText = ref('');
 const isActive = ref(false);
 
 const searchedPlayers = computed(() => {
-  const filteredPlayers = allPlayers.value.filter((player) => player.firstName.toLowerCase().includes(playerSearchText.value.toLowerCase()));
+  const filteredPlayers = allPlayers.value.filter((player) => PlayerService.playerDataContainsText(player, playerSearchText.value.toLowerCase()));
   return filteredPlayers.sort((playerA, playerB) => playerA.firstName > playerB.firstName ? 1 : -1);
 })
 
