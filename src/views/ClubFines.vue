@@ -46,6 +46,7 @@ const isActive = ref(false);
 
 const searchedFines = computed(() => {
   const filteredFines = allClubFines.value.filter((fine) => fine.reason.toLowerCase().includes(reasonSearchText.value.toLowerCase()));
+  filteredFines.sort((fineA, fineB) => fineA.amount > fineB.amount ? 1 : -1);
   return filteredFines;
 })
 
