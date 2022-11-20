@@ -65,3 +65,21 @@ describe("Players View", () => {
     expect(wrapper.html().includes("Joe Poll")).toBeFalsy();
   })
 })
+
+describe("Floating add button", () => {
+  it("contains an add button", async () => {
+    const wrapper = mount(PlayersView, {
+      global: {
+        provide: {
+          database: new Database()
+        },
+        stubs: ["fa"]
+      }
+    });
+
+    await wrapper.vm.$nextTick();
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.find("#floating-add").exists()).toBeTruthy();
+  })
+})

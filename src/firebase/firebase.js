@@ -47,5 +47,21 @@ export default  {
       players.push(doc.data());
     })
     return players;
-  }
+  },
+  addPlayer: async (firstName, lastName, shirtNumber) => {
+    await addDoc(collection(database, "players"), {
+      firstName: firstName,
+      lastName: lastName,
+      shirtNumber: shirtNumber,
+    });
+  },
+  playerExists: async (shirtNumber) => {
+    let players = []
+    const querySnapshot = await getDocs(collection(database, "players"));
+    querySnapshot.forEach((doc) => {
+      players.push(doc.data());
+    })
+    let filteredPlayers = players.filter((player) => player.shirtNumber == shirtNumber);
+    return filteredPlayers.length > 0;
+  },
 }

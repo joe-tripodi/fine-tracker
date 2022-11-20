@@ -19,6 +19,11 @@
         </table>
       </div>
     </div>
+    <a @click="showAddPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+       <fa icon="fas fa-add"></fa>
+    </a>
+
+    <AddPlayerModal @closeAddPlayerModal="closeAddPlayerModal" :isActive="isActive" ></AddPlayerModal>
   </div>
 </template>
 
@@ -26,16 +31,29 @@
 import { inject, onMounted, ref, computed } from 'vue';
 
 import PlayerTd from '../components/PlayerTd.vue';
+import AddPlayerModal from '../modals/AddPlayerModal.vue';
 
 const database = inject('database');
 const allPlayers = ref([]);
 const isDataLoaded = ref(false);
 const playerSearchText = ref('');
+const isActive = ref(false);
 
 const searchedPlayers = computed(() => {
   const filteredPlayers = allPlayers.value.filter((player) => player.firstName.toLowerCase().includes(playerSearchText.value.toLowerCase()));
-  return filteredPlayers;
+  return filteredPlayers.sort((playerA, playerB) => playerA.firstName > playerB.firstName ? 1 : -1);
 })
+
+async function closeAddPlayerModal(playerCreated){
+  if(playerCreated){
+    allPlayers.value = await database.getAllPlayers();
+  }
+  isActive.value = false;
+}
+
+function showAddPlayerModal(){
+  isActive.value = true;
+}
 
 onMounted(async () => {
   allPlayers.value = await database.getAllPlayers();
