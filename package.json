@@ -14,13 +14,16 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/vue-fontawesome": "^3.0.1",
+    "@mdi/font": "^7.0.96",
     "bulma": "^0.9.4",
     "bulma-floating-button": "^1.0.3",
     "firebase": "^9.12.1",
     "happy-dom": "^7.6.0",
     "pinia": "^2.0.21",
+    "vite-plugin-vuetify": "^1.0.0",
     "vue": "^3.2.38",
-    "vue-router": "^4.1.5"
+    "vue-router": "^4.1.5",
+    "vuetify": "^3.0.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
