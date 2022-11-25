@@ -2,6 +2,10 @@ import { describe, it, expect } from 'vitest'
 
 import { mount, shallowMount } from '@vue/test-utils'
 import PlayersView from '../PlayersView.vue'
+import { createVuetify } from "vuetify";
+import PlayerCard from "../../components/PlayerCard.vue"
+
+const vuetify = createVuetify();
 
 const Database = class {
   players = [
@@ -27,7 +31,8 @@ describe("Players View", () => {
         provide: {
           database: new Database()
         },
-        stubs: ["fa"]
+        stubs: ["fa"],
+        plugins: [vuetify]
       }
     });
     expect(wrapper.exists()).toBe(true);
@@ -39,14 +44,15 @@ describe("Players View", () => {
         provide: {
           database: new Database()
         },
-        stubs: ["fa"]
+        stubs: ["fa"],
+        plugins: [vuetify],
       }
     });
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
-    expect(wrapper.html()).toContain("Stefan Didone");
-    expect(wrapper.html()).toContain("Joe Poll");
+    expect(wrapper.html()).toContain("S. Didone");
+    expect(wrapper.html()).toContain("J. Poll");
   })
 })
 
@@ -57,7 +63,8 @@ describe("Floating add button", () => {
         provide: {
           database: new Database()
         },
-        stubs: ["fa"]
+        stubs: ["fa"],
+        plugins: [vuetify,]
       }
     });
 

@@ -1,29 +1,22 @@
 <template>
-  <div class="ml-5 mr-5 mb-5" v-if="isDataLoaded">
-    <div class="columns">
-      <div class="column">
-        <table class="table is-striped is-fullwidth">
-          <tbody>
-            <tr v-for="player, index in allPlayersSortedByFirstName" :key="index">
-              <PlayerTd :player="player"></PlayerTd>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <a @click="showAddPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-       <fa icon="fas fa-add"></fa>
-    </a>
+<v-container>
+  <v-row dense>
+    <v-col cols="6" v-for="player, index in allPlayersSortedByFirstName" :key="index">
+      <PlayerCard :player="player"></PlayerCard>
+    </v-col>
+  </v-row>
 
-    <AddPlayerModal @closeAddPlayerModal="closeAddPlayerModal" :isActive="isActive" ></AddPlayerModal>
-  </div>
+  <a @click="showAddPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+      <fa icon="fas fa-add"></fa>
+  </a>
+  <AddPlayerModal @closeAddPlayerModal="closeAddPlayerModal" :isActive="isActive" ></AddPlayerModal>
+</v-container>
 </template>
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
-
-import PlayerTd from '../components/PlayerTd.vue';
 import AddPlayerModal from '../modals/AddPlayerModal.vue';
+import PlayerCard from '../components/PlayerCard.vue';
 
 const database = inject('database');
 const allPlayers = ref([]);
