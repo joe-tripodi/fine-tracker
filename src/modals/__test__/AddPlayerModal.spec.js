@@ -4,7 +4,9 @@
 import { describe, it, expect } from "vitest"
 import { shallowMount, mount } from "@vue/test-utils"
 import AddPlayerModal from "../AddPlayerModal.vue"
+import { createVuetify } from "vuetify";
 
+const vuetify = createVuetify();
 const Database = class {
   players = [];
 
@@ -31,6 +33,7 @@ describe("Add Player Modal tests", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     expect(wrapper.exists()).toBeTruthy();
@@ -43,6 +46,7 @@ describe("Add Player Modal tests", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     expect(wrapper.html()).toContain("Add Player");
@@ -55,6 +59,7 @@ describe("Add Player Modal tests", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const classes = wrapper.classes();
@@ -71,16 +76,15 @@ describe("Add Player Modal tests", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
 
     await wrapper.vm.$nextTick();
-
-    const classes = wrapper.classes();
-    expect(classes.find(elementClass => elementClass == "is-active")).toBeTruthy();
+    expect(wrapper.html()).toContain("is-active");
   })
 
-  it("the is-active class is toggled when the prop changes",async () => {
+  it("the is-active class is toggled when the prop changes", async() => {
     const wrapper = mount(AddPlayerModal, {
       props: {
         isActive: true
@@ -90,15 +94,13 @@ describe("Add Player Modal tests", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
 
     wrapper.setProps({isActive: false});
-
     await wrapper.vm.$nextTick();
-
-    const classes = wrapper.classes();
-    expect(classes.find(elementClass => elementClass == "is-active")).toBeFalsy();
+    expect(wrapper.html()).not.toContain("is-active");
 
   })
 
@@ -112,6 +114,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const firstNameInput = wrapper.find("#firstName");
@@ -125,6 +128,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const firstNameInput = wrapper.find("#firstName");
@@ -140,6 +144,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const lastNameInput = wrapper.find("#lastName");
@@ -153,6 +158,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const lastNameInput = wrapper.find("#lastName");
@@ -168,6 +174,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const shirtNumberInput = wrapper.find("#shirtNumber");
@@ -181,6 +188,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const shirtNumberInput = wrapper.find("#shirtNumber");
@@ -196,6 +204,7 @@ describe("user input", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const shirtNumberInput = wrapper.find("#shirtNumber");
@@ -214,6 +223,7 @@ describe("add button", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const buttons = wrapper.findAll("button");
@@ -235,6 +245,7 @@ describe("cancel button", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     const buttons = wrapper.findAll("button");
@@ -255,6 +266,7 @@ describe("cancel button", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       }
     });
     const cancelButton = wrapper.find(".cancel");
@@ -270,6 +282,7 @@ describe("cancel button", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
 
@@ -291,6 +304,7 @@ describe("delete button (menu button)", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     })
 
@@ -304,6 +318,7 @@ describe("delete button (menu button)", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     })
 
@@ -319,6 +334,7 @@ describe("delete button (menu button)", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
 
@@ -342,6 +358,7 @@ describe("add button", () => {
         provide: {
           database: null,
         },
+        plugins: [vuetify]
       },
     });
     expect(wrapper.find(".add").exists()).toBeTruthy();
@@ -355,6 +372,7 @@ describe("add button", () => {
         provide: {
           database: new Database(),
         },
+        plugins: [vuetify]
       },
     });
 
@@ -369,12 +387,13 @@ describe("add button", () => {
 
   it("does not emit closeAddPlayerModal when firstName input is invalid", async () => {
 
-    const wrapper = shallowMount(AddPlayerModal, {
+    const wrapper = mount(AddPlayerModal, {
       global: {
         stubs: ["fa"],
         provide: {
           database: new Database(),
         },
+        plugins: [vuetify]
       },
     });
 
@@ -393,6 +412,7 @@ describe("add button", () => {
         provide: {
           database: new Database(),
         },
+        plugins: [vuetify]
       },
     });
 
@@ -411,6 +431,7 @@ describe("add button", () => {
         provide: {
           database: new Database(),
         },
+        plugins: [vuetify]
       },
     });
 
@@ -428,6 +449,7 @@ describe("add button", () => {
         provide: {
           database: new Database(),
         },
+        plugins: [vuetify]
       },
     });
 
@@ -449,6 +471,7 @@ describe("add button", () => {
         provide: {
           database: database,
         },
+        plugins: [vuetify]
       },
     });
 
@@ -471,6 +494,7 @@ describe("add button", () => {
         provide: {
           database: database,
         },
+        plugins: [vuetify]
       },
     });
 
@@ -488,21 +512,5 @@ describe("add button", () => {
   })
 
 })
-
-// describe("closes when background is pressed", () => {
-//   it("closes when the background is pressed by emitting closeAddPlayerModal", async () => {
-//     const wrapper = shallowMount(AddPlayerModal, {
-//       global: {
-//         stubs: ["fa"],
-//         provide: {
-//           database: new Database(),
-//         },
-//       },
-//     });
-
-//     await wrapper.find(".modal-background").trigger("click");
-//     expect(wrapper.emitted()).toHaveProperty("closeAddPlayerModal");
-//   })
-// })
 
 

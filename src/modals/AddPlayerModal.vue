@@ -50,8 +50,11 @@
         </div>
       </footer>
     </div>
-
   </div>
+
+  <v-snackbar v-model="showSnackbar" :timeout="1500" color="error">
+    We could not add the player.
+  </v-snackbar>
 </template>
 
 <script setup>
@@ -72,6 +75,8 @@ const database = inject('database');
 const shirtNumber = ref();
 const firstName = ref('');
 const lastName = ref('');
+const showSnackbar = ref(false);
+const snackbarText = ref('');
 
 function cleanTheForm(){
   shirtNumber.value = null;
@@ -90,6 +95,8 @@ async function addPlayer(){
     await database.addPlayer(firstName.value, lastName.value, +shirtNumber.value);
     cleanTheForm();
     emit("closeAddPlayerModal", true);
+  } else {
+    showSnackbar.value = true;
   }
 }
 
