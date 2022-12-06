@@ -64,4 +64,13 @@ export default  {
     let filteredPlayers = players.filter((player) => player.shirtNumber == shirtNumber);
     return filteredPlayers.length > 0;
   },
+
+  getAllFines: async () => {
+    let fines = []
+    const querySnapshot = await getDocs(collection(database, "fines"));
+    querySnapshot.forEach((doc) => {
+      fines.push(doc.data());
+    })
+    return fines;
+  }
 }
