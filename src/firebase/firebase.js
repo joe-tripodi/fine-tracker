@@ -48,6 +48,16 @@ export default  {
     })
     return players;
   },
+  getAllPlayersNameAndIds: async () => {
+    let players = []
+    const querySnapshot = await getDocs(collection(database, "players"));
+    querySnapshot.forEach((doc) => {
+      let player = doc.data();
+      player.id = doc.id
+      players.push(player);
+    })
+    return players;
+  },
   addPlayer: async (firstName, lastName, shirtNumber) => {
     await addDoc(collection(database, "players"), {
       firstName: firstName,

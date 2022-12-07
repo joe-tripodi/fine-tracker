@@ -14,4 +14,27 @@ describe("Navigation bar", () => {
     cy.visit("/");
     cy.get(".navbar-item").contains("Club Fines").click();
   })
+
+  it("can navigate on mobile", () => {
+    cy.viewport("iphone-xr");
+    cy.visit("/");
+    cy.get(".navbar-burger").click();
+    cy.get("a[href='/players']").click();
+    cy.get("#floating-add").click();
+    cy.get(".delete").click();
+
+    cy.get(".navbar-burger").click();
+    cy.get("a[href='/clubfines']").click();
+
+    cy.get(".navbar-burger").click();
+    cy.get("a[href='/playerfines']").click();
+
+    cy.get(".navbar-burger").click();
+    cy.get("a[href='/statistics']").click();
+
+    cy.get(".navbar-burger").click();
+    cy.get("a[href='/home']").click();
+  })
+
+
 });

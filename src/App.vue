@@ -9,7 +9,7 @@
     </div>
     <div class="navbar-menu" :class="active ? 'is-active' : ''">
       <div class="navbar-start">
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/">Home</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/home">Home</RouterLink>
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/clubfines">Club Fines</RouterLink>
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/playerfines">Player Fines</RouterLink>
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/players">Players</RouterLink>
