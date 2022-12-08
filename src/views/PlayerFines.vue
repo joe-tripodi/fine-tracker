@@ -8,24 +8,43 @@
     <a @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
       <fa icon="fas fa-add"></fa>
     </a>
+    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="playerFineModalIsActive"></PlayerFineModal>
   </v-container>
 </template>
   
 <script setup>
-import { inject, onMounted, ref, computed } from 'vue';
-import FineCard from '../components/FineCard.vue';
+import { inject, onMounted, ref, computed } from "vue";
+import FineCard from "../components/FineCard.vue";
+import PlayerFineModal from "../modals/PlayerFineModal.vue";
 
-const database = inject('database');
+const database = inject("database");
 const allFines = ref([]);
 const isDataLoaded = ref(false);
-
-const allUnpaidFines = computed(() => {
-  return allFines.value.filter((fine) => fine.paid == false).sort((fineA, fineB) => fineA.playerId - fineB.playerId);
-})
+const playerFineModalIsActive = ref(false);
 
 onMounted(async () => {
   allFines.value = await database.getAllFines();
   isDataLoaded.value = true;
 })
+
+const allUnpaidFines = computed(() => {
+  return allFines.value.filter((fine) => fine.paid == false).sort((fineA, fineB) => {
+    if(fineA.playerName < fineB.playerName) return -1;
+    if(fineA.playerName > fineB.playerName) return 1;
+    return 0;
+  });
+})
+
+async function closeFineAPlayerModal(fetchNewFines){
+  playerFineModalIsActive.value = false;
+  if(fetchNewFines){
+    allFines.value = await database.getAllFines();
+  }
+}
+
+function showFineAPlayerModal(){
+  playerFineModalIsActive.value = true;
+}
+
 </script>
   

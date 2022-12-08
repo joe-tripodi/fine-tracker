@@ -73,6 +73,14 @@ const Database = class {
   async getAllPlayers() {
     return this.players;
   }
+
+  async getAllClubFines(){
+    return [];
+  }
+
+  async getAllPlayersNameAndIds() {
+    return this.players;
+  }
 }
 
 describe("Players Fines", () => {

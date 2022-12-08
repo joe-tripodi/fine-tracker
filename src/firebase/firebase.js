@@ -82,5 +82,10 @@ export default  {
       fines.push(doc.data());
     })
     return fines;
+  },
+  addPlayerFines: async (playerFines) => {
+    playerFines.forEach( async (fine) => {
+      await addDoc(collection(database, "fines"), fine);
+    })
   }
 }
