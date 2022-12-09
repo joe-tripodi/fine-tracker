@@ -3,8 +3,8 @@
     <div class="d-flex flex-no-wrap justify-space-between">
       <div>
         <v-card-subtitle class="font-weight-black text-body-1">{{fine.reason}}</v-card-subtitle>
-        <v-card-subtitle>{{fineDate}}</v-card-subtitle>
         <v-card-subtitle>{{fine.playerName}}</v-card-subtitle>
+        <v-card-subtitle>{{fineDate}}</v-card-subtitle>
       </div>
       <v-card-actions>
         <v-avatar color="blue" >${{fine.amount}}</v-avatar>
