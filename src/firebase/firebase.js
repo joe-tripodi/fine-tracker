@@ -98,4 +98,8 @@ export default  {
     const fineRef = doc(database, "fines", id);
     await setDoc(fineRef, {void: true}, {merge: true});
   },
+  finePaid: async (id) => {
+    const fineRef = doc(database, "fines", id);
+    await setDoc(fineRef, {paid: true}, {merge: true});
+  }
 }

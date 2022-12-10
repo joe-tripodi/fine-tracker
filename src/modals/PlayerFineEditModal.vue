@@ -88,23 +88,19 @@ function isFormValid(){
 }
 
 async function voidFine(){
-  await database.voidFine( playerFine.value.id)
+  await database.voidFine(playerFine.value.id)
   emit("closeEditPlayerFineModal", true);
 }
 
 function doubleFine(){
   fineAmount.value = fineAmount.value * 2;
-  //api call to double the fine
-  //database.doubleFine(fine.id, fine.doubleFactor)
 }
 
 function halveFine(){
   fineAmount.value = fineAmount.value / 2;
-  // api call to halve the fine
 }
 
 async function saveFine(){
-  // api call to save the fine and close
   if(!isFormValid()) return;
   let saveFine = {
     reason: fineReason.value,
@@ -115,9 +111,9 @@ async function saveFine(){
   emit("closeEditPlayerFineModal", true);
 }
 
-function finePaid(){
-  // api call to pay the fine
+async function finePaid(){
   if(!isFormValid()) return;
+  await database.finePaid(playerFine.value.id);
   emit("closeEditPlayerFineModal", true);
 }
 
