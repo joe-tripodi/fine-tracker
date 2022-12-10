@@ -1,16 +1,33 @@
 <template>
-  <v-container fluid>
-    <v-row dense>
-      <v-col cols="12" v-for="fine, index in allUnpaidFines" :key="index">
-        <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
-      </v-col>
-    </v-row>
-    <a @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-      <fa icon="fas fa-add"></fa>
-    </a>
-    <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
-    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
-  </v-container>
+  <v-tabs v-model="tab">
+    <v-tab value="due">DUE</v-tab>
+    <v-tab value="paid">PAID</v-tab>
+  </v-tabs>
+  <v-window v-model="tab">
+    <v-window-item value="due">
+      <v-container fluid>
+        <v-row dense>
+          <v-col cols="12" v-for="fine, index in allUnpaidFines" :key="index">
+            <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
+          </v-col>
+        </v-row>
+        <a @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+          <fa icon="fas fa-add"></fa>
+        </a>
+        <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+        <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
+      </v-container>
+    </v-window-item>
+    <v-window-item value="paid">
+      <v-container fluid>
+        <v-row dense>
+          <v-col cols="12" v-for="fine, index in allPaidFines" :key="index">
+            <FineCard :fine="fine"></FineCard>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-window-item>
+  </v-window>
 </template>
   
 <script setup>
@@ -25,6 +42,7 @@ const isDataLoaded = ref(false);
 const addplayerFineModalIsActive = ref(false);
 const editPlayerFineModalIsActive = ref(false);
 const fineToEdit = ref({});
+const tab = ref(null);
 
 onMounted(async () => {
   allFines.value = await database.getAllFines();
@@ -33,6 +51,14 @@ onMounted(async () => {
 
 const allUnpaidFines = computed(() => {
   return allFines.value.filter((fine) => fine.paid == false && fine.void == false).sort((fineA, fineB) => {
+    if(fineA.dateCreated < fineB.dateCreated) return -1;
+    if(fineA.dateCreated > fineB.dateCreated) return 1;
+    return 0;
+  });
+})
+
+const allPaidFines = computed(() => {
+  return allFines.value.filter((fine) => fine.paid == true && fine.void == false).sort((fineA, fineB) => {
     if(fineA.dateCreated < fineB.dateCreated) return -1;
     if(fineA.dateCreated > fineB.dateCreated) return 1;
     return 0;
