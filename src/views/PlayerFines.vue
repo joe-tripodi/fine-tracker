@@ -2,13 +2,14 @@
   <v-container fluid>
     <v-row dense>
       <v-col cols="12" v-for="fine, index in allUnpaidFines" :key="index">
-        <FineCard :fine="fine"></FineCard>
+        <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
       </v-col>
     </v-row>
     <a @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
       <fa icon="fas fa-add"></fa>
     </a>
-    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="playerFineModalIsActive"></PlayerFineModal>
+    <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
   </v-container>
 </template>
   
@@ -16,11 +17,14 @@
 import { inject, onMounted, ref, computed } from "vue";
 import FineCard from "../components/FineCard.vue";
 import PlayerFineModal from "../modals/PlayerFineModal.vue";
+import PlayerFineEditModal from "../modals/PlayerFineEditModal.vue"
 
 const database = inject("database");
 const allFines = ref([]);
 const isDataLoaded = ref(false);
-const playerFineModalIsActive = ref(false);
+const addplayerFineModalIsActive = ref(false);
+const editPlayerFineModalIsActive = ref(false);
+const fineToEdit = ref({});
 
 onMounted(async () => {
   allFines.value = await database.getAllFines();
@@ -28,22 +32,34 @@ onMounted(async () => {
 })
 
 const allUnpaidFines = computed(() => {
-  return allFines.value.filter((fine) => fine.paid == false).sort((fineA, fineB) => {
-    if(fineA.playerName < fineB.playerName) return -1;
-    if(fineA.playerName > fineB.playerName) return 1;
+  return allFines.value.filter((fine) => fine.paid == false && fine.void == false).sort((fineA, fineB) => {
+    if(fineA.dateCreated < fineB.dateCreated) return -1;
+    if(fineA.dateCreated > fineB.dateCreated) return 1;
     return 0;
   });
 })
 
 async function closeFineAPlayerModal(fetchNewFines){
-  playerFineModalIsActive.value = false;
+  addplayerFineModalIsActive.value = false;
   if(fetchNewFines){
     allFines.value = await database.getAllFines();
   }
 }
 
 function showFineAPlayerModal(){
-  playerFineModalIsActive.value = true;
+  addplayerFineModalIsActive.value = true;
+}
+
+function showFineDetail(fine){
+  fineToEdit.value = fine;
+  editPlayerFineModalIsActive.value = true;
+}
+
+async function closeEditPlayerFineModal(fetchNewFines){
+  editPlayerFineModalIsActive.value = false;
+  if(fetchNewFines){
+    allFines.value = await database.getAllFines();
+  }
 }
 
 </script>

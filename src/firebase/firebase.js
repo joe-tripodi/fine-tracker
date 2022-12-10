@@ -1,16 +1,16 @@
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore"
-import { addDoc, collection, getDocs } from "@firebase/firestore";
+import { addDoc, collection, getDocs, setDoc, doc } from "@firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAJgWeRp82eZmVTK6UzTb4COjvn1QBhSJw",
-  authDomain: "fines-wssc.firebaseapp.com",
-  projectId: "fines-wssc",
-  storageBucket: "fines-wssc.appspot.com",
-  messagingSenderId: "631644080600",
-  appId: "1:631644080600:web:1726c144d6e42ca94d8aad",
-  measurementId: "G-S348YFRZ29"
+  apiKey: `${import.meta.env.VITE_FIREBASE_API_KEY}`,
+  authDomain: `${import.meta.env.VITE_FIREBASE_AUTH_DOMAIN}`,
+  projectId: `${import.meta.env.VITE_FIREBASE_PROJECT_ID}`,
+  storageBucket: `${import.meta.env.VITE_STORAGE_BUCKET}`,
+  messagingSenderId: `${import.meta.env.MESSAGING_SENDER_ID}`,
+  appId: `${import.meta.env.VITE_APP_ID}`,
+  measurementId: `${import.meta.env.VITE_MEASUREMENT_ID}`
 };
 
 const app = initializeApp(firebaseConfig);
@@ -79,7 +79,9 @@ export default  {
     let fines = []
     const querySnapshot = await getDocs(collection(database, "fines"));
     querySnapshot.forEach((doc) => {
-      fines.push(doc.data());
+      let fine = doc.data();
+      fine.id = doc.id;
+      fines.push(fine);
     })
     return fines;
   },
@@ -87,5 +89,13 @@ export default  {
     playerFines.forEach( async (fine) => {
       await addDoc(collection(database, "fines"), fine);
     })
-  }
+  },
+  saveFine: async (fine) => {
+    const fineRef = doc(database, "fines", `${fine.id}`);
+    await setDoc(fineRef, fine, {merge: true});
+  },
+  voidFine: async (id) => {
+    const fineRef = doc(database, "fines", id);
+    await setDoc(fineRef, {void: true}, {merge: true});
+  },
 }
