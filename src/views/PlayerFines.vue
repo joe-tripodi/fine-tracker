@@ -1,35 +1,39 @@
 <template>
-  <v-container>
-  <v-tabs fixed-tabs v-model="tab">
-    <v-tab value="due">DUE</v-tab>
-    <v-tab value="paid">PAID</v-tab>
-  </v-tabs>
-  <v-window v-model="tab">
-    <v-window-item value="due">
-      <v-container fluid>
-        <v-row dense>
-          <v-col cols="12" v-for="fine, index in allUnpaidFines" :key="index">
-            <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
-          </v-col>
-        </v-row>
-        <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-          <fa icon="fas fa-add"></fa>
-        </a>
-        <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
-        <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
-      </v-container>
-    </v-window-item>
-    <v-window-item value="paid">
-      <v-container fluid>
-        <v-row dense>
-          <v-col cols="12" v-for="fine, index in allPaidFines" :key="index">
-            <FineCard :fine="fine"></FineCard>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-window-item>
-  </v-window>
-  </v-container>
+  <v-card>
+    <v-card-text>
+    <v-tabs fixed-tabs v-model="tab">
+      <v-tab value="due">DUE</v-tab>
+      <v-tab value="paid">PAID</v-tab>
+    </v-tabs>
+    </v-card-text>
+    <v-card-text>
+      <v-window v-model="tab">
+        <v-window-item value="due">
+          <v-container fluid>
+            <v-row dense>
+              <v-col cols="12" v-for="fine, index in allUnpaidFines" :key="index">
+                <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-window-item>
+        <v-window-item value="paid">
+          <v-container fluid>
+            <v-row dense>
+              <v-col cols="12" v-for="fine, index in allPaidFines" :key="index">
+                <FineCard :fine="fine"></FineCard>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-window-item>
+      </v-window>
+    </v-card-text>
+  <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+    <fa icon="fas fa-add"></fa>
+  </a>
+  <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+  <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
+  </v-card>
 </template>
   
 <script setup>
