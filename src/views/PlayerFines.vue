@@ -11,6 +11,11 @@
             <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
           </v-col>
         </v-row>
+        <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+          <fa icon="fas fa-add"></fa>
+        </a>
+        <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+        <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
       </v-container>
     </v-window-item>
     <v-window-item value="paid">
@@ -23,11 +28,6 @@
       </v-container>
     </v-window-item>
   </v-window>
-  <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-    <fa icon="fas fa-add"></fa>
-  </a>
-  <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
-  <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
 </template>
   
 <script setup>
