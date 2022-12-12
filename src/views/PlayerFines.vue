@@ -1,4 +1,5 @@
 <template>
+  <v-container>
   <v-tabs fixed-tabs v-model="tab">
     <v-tab value="due">DUE</v-tab>
     <v-tab value="paid">PAID</v-tab>
@@ -28,6 +29,7 @@
       </v-container>
     </v-window-item>
   </v-window>
+  </v-container>
 </template>
   
 <script setup>
