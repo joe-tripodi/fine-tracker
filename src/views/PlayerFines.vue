@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-text>
-    <v-tabs fixed-tabs v-model="tab">
+    <v-tabs v-model="tab">
       <v-tab value="due">DUE</v-tab>
       <v-tab value="paid">PAID</v-tab>
     </v-tabs>
