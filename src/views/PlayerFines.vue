@@ -85,8 +85,10 @@ function showFineAPlayerModal(){
 }
 
 function showFineDetail(fine){
-  fineToEdit.value = fine;
-  editPlayerFineModalIsActive.value = true;
+  if(isLoggedIn.value){
+    fineToEdit.value = fine;
+    editPlayerFineModalIsActive.value = true;
+  }
 }
 
 async function closeEditPlayerFineModal(fetchNewFines){
