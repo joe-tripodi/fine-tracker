@@ -22,12 +22,12 @@
         </v-row>
       </v-container>
     </v-window-item>
-    <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-      <fa icon="fas fa-add"></fa>
-    </a>
-    <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
-    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
   </v-window>
+  <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+    <fa icon="fas fa-add"></fa>
+  </a>
+  <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+  <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
 </template>
   
 <script setup>
