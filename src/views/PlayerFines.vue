@@ -1,12 +1,8 @@
 <template>
-  <v-card>
-    <v-card-text>
-    <v-tabs v-model="tab">
+    <v-tabs grow v-model="tab">
       <v-tab value="due">DUE</v-tab>
       <v-tab value="paid">PAID</v-tab>
     </v-tabs>
-    </v-card-text>
-    <v-card-text>
       <v-window v-model="tab">
         <v-window-item value="due">
           <v-container fluid>
@@ -27,13 +23,11 @@
           </v-container>
         </v-window-item>
       </v-window>
-    </v-card-text>
   <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
     <fa icon="fas fa-add"></fa>
   </a>
   <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
   <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
-  </v-card>
 </template>
   
 <script setup>
