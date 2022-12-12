@@ -6,7 +6,7 @@
     </v-col>
   </v-row>
 
-  <a @click="showAddPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+  <a v-if="isLoggedIn" @click="showAddPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
       <fa icon="fas fa-add"></fa>
   </a>
   <AddPlayerModal @closeAddPlayerModal="closeAddPlayerModal" :isActive="isActive" ></AddPlayerModal>
@@ -15,6 +15,7 @@
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
+import { useAuthentication } from "../composables/authentication"
 import AddPlayerModal from '../modals/AddPlayerModal.vue';
 import PlayerCard from '../components/PlayerCard.vue';
 
@@ -22,6 +23,7 @@ const database = inject('database');
 const allPlayers = ref([]);
 const isDataLoaded = ref(false);
 const isActive = ref(false);
+const isLoggedIn = useAuthentication().isLoggedIn;
 
 const allPlayersSortedByFirstName = computed(() => {
   return allPlayers.value.sort((playerA, playerB) => playerA.firstName > playerB.firstName ? 1 : -1);

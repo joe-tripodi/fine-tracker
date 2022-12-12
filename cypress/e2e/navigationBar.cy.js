@@ -20,8 +20,6 @@ describe("Navigation bar", () => {
     cy.visit("/");
     cy.get(".navbar-burger").click();
     cy.get("a[href='/players']").click();
-    cy.get("#floating-add").click();
-    cy.get(".delete").click();
 
     cy.get(".navbar-burger").click();
     cy.get("a[href='/clubfines']").click();

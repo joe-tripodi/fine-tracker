@@ -14,6 +14,7 @@
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/playerfines">Player Fines</RouterLink>
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/players">Players</RouterLink>
         <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/statistics">Statistics</RouterLink>
+        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/login">Admin login</RouterLink>
       </div>
     </div>
   </div>

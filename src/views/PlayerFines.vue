@@ -11,11 +11,6 @@
             <FineCard @click="showFineDetail(fine)" :fine="fine"></FineCard>
           </v-col>
         </v-row>
-        <a @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
-          <fa icon="fas fa-add"></fa>
-        </a>
-        <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
-        <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
       </v-container>
     </v-window-item>
     <v-window-item value="paid">
@@ -27,11 +22,17 @@
         </v-row>
       </v-container>
     </v-window-item>
+    <a v-if="isLoggedIn" @click="showFineAPlayerModal" class="button is-floating is-dark is-small" id="floating-add">
+      <fa icon="fas fa-add"></fa>
+    </a>
+    <PlayerFineEditModal @closeEditPlayerFineModal="closeEditPlayerFineModal" :fine="fineToEdit" :isActive="editPlayerFineModalIsActive"></PlayerFineEditModal>
+    <PlayerFineModal @closeFineAPlayerModal="closeFineAPlayerModal" :isActive="addplayerFineModalIsActive"></PlayerFineModal>
   </v-window>
 </template>
   
 <script setup>
 import { inject, onMounted, ref, computed } from "vue";
+import { useAuthentication } from "../composables/authentication"
 import FineCard from "../components/FineCard.vue";
 import PlayerFineModal from "../modals/PlayerFineModal.vue";
 import PlayerFineEditModal from "../modals/PlayerFineEditModal.vue"
@@ -43,6 +44,7 @@ const addplayerFineModalIsActive = ref(false);
 const editPlayerFineModalIsActive = ref(false);
 const fineToEdit = ref({});
 const tab = ref(null);
+const isLoggedIn = useAuthentication().isLoggedIn;
 
 onMounted(async () => {
   allFines.value = await database.getAllFines();

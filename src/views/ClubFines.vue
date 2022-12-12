@@ -17,7 +17,7 @@
         </table>
       </div>
     </div>
-    <a @click="showClubFineModal" class="button is-floating is-dark is-small" id="floating-add">
+    <a v-if="isLoggedIn" @click="showClubFineModal" class="button is-floating is-dark is-small" id="floating-add">
        <fa icon="fas fa-add"></fa>
     </a>
     <AddClubFineModal @closeAddClubFineModal="closeAddClubFineModal" :isActive="isActive" ></AddClubFineModal>
@@ -26,6 +26,7 @@
 
 <script setup>
 import { inject, onMounted, ref, computed } from 'vue';
+import { useAuthentication } from '../composables/authentication';
 import AddClubFineModal from '../modals/AddClubFineModal.vue';
 
 import ClubFine from '../components/ClubFine.vue';
@@ -35,6 +36,7 @@ const allClubFines = ref([]);
 const isDataLoaded = ref(false);
 const reasonSearchText = ref('');
 const isActive = ref(false);
+const isLoggedIn = useAuthentication().isLoggedIn;
 
 const searchedFines = computed(() => {
   const filteredFines = allClubFines.value.filter((fine) => fine.reason.toLowerCase().includes(reasonSearchText.value.toLowerCase()));
