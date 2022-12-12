@@ -1,8 +1,8 @@
 <template>
   <v-card color="#fafafa" theme="light">
-    <div class="d-flex flex-no-wrap justify-space-between">
+    <div class="d-flex justify-space-between">
       <div>
-        <v-card-subtitle class="font-weight-black text-body-1">{{fine.reason}}</v-card-subtitle>
+        <v-card-subtitle class="font-weight-black text-body-1 text-wrap">{{fine.reason}}</v-card-subtitle>
         <v-card-subtitle>{{fine.playerName}}</v-card-subtitle>
         <v-card-subtitle>{{fineDate}}</v-card-subtitle>
       </div>
