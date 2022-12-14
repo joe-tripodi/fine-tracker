@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { addDoc, collection, getDocs, setDoc, doc } from "@firebase/firestore";
+import { initializeApp } from "@firebase/app";
+import { getFirestore } from "@firebase/firestore";
+import { addDoc, collection, getDocs, setDoc, doc, query, where } from "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: `${import.meta.env.VITE_FIREBASE_API_KEY}`,
@@ -77,7 +77,6 @@ export default {
     );
     return filteredPlayers.length > 0;
   },
-
   getAllFines: async () => {
     let fines = [];
     const querySnapshot = await getDocs(collection(database, "fines"));
@@ -87,6 +86,28 @@ export default {
       fines.push(fine);
     });
     return fines;
+  },
+  getAllUnpaidFines: async () => {
+    let unpaidFines = [];
+    const q = query(collection(database, "fines"), where("paid", "==", false, ), where("void", "==", false));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let fine = doc.data();
+      fine.id = doc.id;
+      unpaidFines.push(fine);
+    })
+    return unpaidFines;
+  },
+  getAllPaidFines: async () => {
+    let paidFines = [];
+    const q = query(collection(database, "fines"), where("paid", "==", true, ), where("void", "==", false));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let fine = doc.data();
+      fine.id = doc.id;
+      paidFines.push(fine);
+    })
+    return paidFines;
   },
   addPlayerFines: async (playerFines) => {
     playerFines.forEach(async (fine) => {

@@ -50,43 +50,32 @@ import PlayerFineModal from "../modals/PlayerFineModal.vue";
 import PlayerFineEditModal from "../modals/PlayerFineEditModal.vue";
 
 const database = inject("database");
-const allFines = ref([]);
-const isDataLoaded = ref(false);
 const addplayerFineModalIsActive = ref(false);
 const editPlayerFineModalIsActive = ref(false);
 const fineToEdit = ref({});
 const tab = ref(null);
 const isLoggedIn = useAuthentication().isLoggedIn;
+const allUnpaidFines = ref([]);
+const allPaidFines = ref([]);
 
 onMounted(async () => {
-  allFines.value = await database.getAllFines();
-  isDataLoaded.value = true;
-});
-
-const allUnpaidFines = computed(() => {
-  return allFines.value
-    .filter((fine) => fine.paid == false && fine.void == false)
-    .sort((fineA, fineB) => {
-      if (fineA.dateCreated < fineB.dateCreated) return -1;
-      if (fineA.dateCreated > fineB.dateCreated) return 1;
-      return 0;
-    });
-});
-
-const allPaidFines = computed(() => {
-  return allFines.value
-    .filter((fine) => fine.paid == true && fine.void == false)
-    .sort((fineA, fineB) => {
-      if (fineA.dateCreated < fineB.dateCreated) return -1;
-      if (fineA.dateCreated > fineB.dateCreated) return 1;
-      return 0;
-    });
+  database.getAllUnpaidFines().then((res) => {
+    allUnpaidFines.value = res;
+  });
+  database.getAllPaidFines().then((res) => {
+    allPaidFines.value = res;
+  });
 });
 
 async function closeFineAPlayerModal(fetchNewFines) {
   addplayerFineModalIsActive.value = false;
   if (fetchNewFines) {
-    allFines.value = await database.getAllFines();
+    database.getAllUnpaidFines().then((res) => {
+      allUnpaidFines.value = res;
+    });
+    database.getAllPaidFines().then((res) => {
+      allPaidFines.value = res;
+    });
   }
 }
 
@@ -104,7 +93,12 @@ function showFineDetail(fine) {
 async function closeEditPlayerFineModal(fetchNewFines) {
   editPlayerFineModalIsActive.value = false;
   if (fetchNewFines) {
-    allFines.value = await database.getAllFines();
+    database.getAllUnpaidFines().then((res) => {
+      allUnpaidFines.value = res;
+    });
+    database.getAllPaidFines().then((res) => {
+      allPaidFines.value = res;
+    });
   }
 }
 </script>

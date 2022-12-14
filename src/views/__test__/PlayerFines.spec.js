@@ -62,12 +62,16 @@ const Database = class {
     },
   ];
 
-  async getAllUnpaid() {
+  async getAllUnpaidFines() {
     return this.fines.filter((fine) => fine.paid == false);
   }
 
   async getAllFines() {
     return this.fines;
+  }
+
+  async getAllPaidFines() {
+    return this.fines.filter((fine) => fine.paid == true);
   }
 
   async getAllPlayers() {
