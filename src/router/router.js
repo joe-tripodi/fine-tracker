@@ -36,13 +36,12 @@ const routes = [
     name: "login",
     component: () => import("../views/LoginView.vue"),
   },
-  
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes: routes,
-  linkActiveClass: 'has-background-light'
+  linkActiveClass: "has-background-light",
 });
 
 export { routes };

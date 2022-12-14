@@ -22,7 +22,7 @@ export default defineConfig({
     environment: "happy-dom",
     setupFiles: "vuetify.config.js",
     deps: {
-      inline: ["vuetify"]
-    }
-  }
+      inline: ["vuetify"],
+    },
+  },
 });

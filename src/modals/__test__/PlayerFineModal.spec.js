@@ -1,8 +1,7 @@
-import { describe, it, expect } from "vitest"
-import { shallowMount, mount } from "@vue/test-utils"
-import PlayerFineModal from "../PlayerFineModal.vue"
+import { describe, it, expect } from "vitest";
+import { shallowMount, mount } from "@vue/test-utils";
+import PlayerFineModal from "../PlayerFineModal.vue";
 import { createVuetify } from "vuetify";
-
 
 const vuetify = createVuetify();
 
@@ -14,7 +13,7 @@ const Database = class {
     },
     {
       reason: "Late to game",
-      amount: 50
+      amount: 50,
     },
   ];
 
@@ -23,35 +22,35 @@ const Database = class {
       firstName: "Stefan",
       lastName: "Didone",
       shirtNumber: 8,
-      id: 2
+      id: 2,
     },
     {
       firstName: "Joe",
       lastName: "Poll",
       shirtNumber: 3,
-      id: 1
+      id: 1,
     },
   ];
 
-  async getAllPlayersNameAndIds(){
+  async getAllPlayersNameAndIds() {
     return this.players;
   }
 
-  async getAllClubFines(){
+  async getAllClubFines() {
     return this.clubFines;
   }
-}
+};
 
-describe("Create a player fine modal test", ()=> {
+describe("Create a player fine modal test", () => {
   it("exists and can be mounted", () => {
     const wrapper = mount(PlayerFineModal, {
       global: {
         provide: {
-          database: new Database()
+          database: new Database(),
         },
-        plugins: [vuetify]
-      }
+        plugins: [vuetify],
+      },
     });
     expect(wrapper.exists()).toBeTruthy();
-  })
-})
+  });
+});

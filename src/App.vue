@@ -1,7 +1,18 @@
 <template>
-  <div class="navbar is-white has-shadow" role="navigation" aria-label="main-navigation">
+  <div
+    class="navbar is-white has-shadow"
+    role="navigation"
+    aria-label="main-navigation"
+  >
     <div class="navbar-brand">
-      <a role="button" @click="toggleIsActive()" class="navbar-burger" aria-label="menu" aria-expanded="false" :class="active ? 'is-active' : ''">
+      <a
+        role="button"
+        @click="toggleIsActive()"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        :class="active ? 'is-active' : ''"
+      >
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
@@ -9,12 +20,42 @@
     </div>
     <div class="navbar-menu" :class="active ? 'is-active' : ''">
       <div class="navbar-start">
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/home">Home</RouterLink>
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/clubfines">Club Fines</RouterLink>
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/playerfines">Player Fines</RouterLink>
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/players">Players</RouterLink>
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/statistics">Statistics</RouterLink>
-        <RouterLink @click="closeBurgerMenu()" class="navbar-item has-text-black" to="/login">Admin login</RouterLink>
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/home"
+          >Home</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/clubfines"
+          >Club Fines</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/playerfines"
+          >Player Fines</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/players"
+          >Players</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/statistics"
+          >Statistics</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
+          to="/login"
+          >Admin login</RouterLink
+        >
       </div>
     </div>
   </div>
@@ -24,26 +65,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 
-const active = ref(false)
+const active = ref(false);
 
-function toggleIsActive(){
+function toggleIsActive() {
   active.value = !active.value;
 }
 
-function closeBurgerMenu(){
+function closeBurgerMenu() {
   active.value = false;
 }
-
 </script>
 
 <style>
-@import 'bulma/css/bulma.css';
-@import 'bulma-floating-button/dist/css/bulma-floating-button.min.css';
+@import "bulma/css/bulma.css";
+@import "bulma-floating-button/dist/css/bulma-floating-button.min.css";
 
-
-.navbar-item:hover{
+.navbar-item:hover {
   background-color: white !important;
   text-decoration: underline;
 }

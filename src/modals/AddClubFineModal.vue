@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" :class="{'is-active': isActive}">
+  <div class="modal" :class="{ 'is-active': isActive }">
     <div @click="closeModal" class="modal-background"></div>
 
     <div class="modal-card">
@@ -9,13 +9,18 @@
       </header>
 
       <section class="modal-card-body">
-
         <div class="field">
           <div class="control has-icons-left">
             <span class="icon is-small is-left">
               <fa icon="fas fa-gavel"></fa>
             </span>
-            <input id="reasonForFine" v-model="reasonForFine" class="input" type="text" placeholder="Enter a fine reason..">
+            <input
+              id="reasonForFine"
+              v-model="reasonForFine"
+              class="input"
+              type="text"
+              placeholder="Enter a fine reason.."
+            />
           </div>
         </div>
 
@@ -24,10 +29,16 @@
             <span class="icon is-small is-left">
               <fa icon="fas fa-dollar"></fa>
             </span>
-            <input @keyup.enter="addClubFine" id="fineAmount" v-model="fineAmount" class="input" type="number" placeholder="Enter an amount.." >
+            <input
+              @keyup.enter="addClubFine"
+              id="fineAmount"
+              v-model="fineAmount"
+              class="input"
+              type="number"
+              placeholder="Enter an amount.."
+            />
           </div>
         </div>
-
       </section>
 
       <footer class="modal-card-foot">
@@ -36,12 +47,13 @@
             <button @click="closeModal" class="button cancel">Cancel</button>
           </div>
           <div class="control">
-            <button @click="addClubFine" class="button  is-success add">Add</button>
+            <button @click="addClubFine" class="button is-success add">
+              Add
+            </button>
           </div>
         </div>
       </footer>
     </div>
-
   </div>
 </template>
 
@@ -52,45 +64,44 @@ const props = defineProps({
   isActive: {
     type: Boolean,
     default: false,
-  }
-})
+  },
+});
 
 const emit = defineEmits({
   closeAddClubFineModal: null,
-})
+});
 
-const database = inject('database');
+const database = inject("database");
 const fineAmount = ref();
-const reasonForFine = ref('');
+const reasonForFine = ref("");
 
-function cleanTheForm(){
+function cleanTheForm() {
   fineAmount.value = null;
-  reasonForFine.value = '';
+  reasonForFine.value = "";
 }
 
-function closeModal(){
+function closeModal() {
   cleanTheForm();
   emit("closeAddClubFineModal", false);
 }
 
-async function addClubFine(){
+async function addClubFine() {
   let fineDoesNotExist = !(await database.clubFineExists(reasonForFine.value));
-  if(isValidForm() && fineDoesNotExist){
+  if (isValidForm() && fineDoesNotExist) {
     await database.addClubFine(reasonForFine.value, +fineAmount.value);
     cleanTheForm();
     emit("closeAddClubFineModal", true);
   }
 }
 
-function isValidForm(){
+function isValidForm() {
   let validForm = true;
-  if(reasonForFine.value.length == 0){
+  if (reasonForFine.value.length == 0) {
     validForm = false;
   }
-  if(isNaN(+fineAmount.value) || +fineAmount.value <= 0){
+  if (isNaN(+fineAmount.value) || +fineAmount.value <= 0) {
     validForm = false;
   }
   return validForm;
 }
-
 </script>

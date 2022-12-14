@@ -1,10 +1,9 @@
 /*
-* @vitest-environment happy-dom
-*/
-import { describe, it, expect } from "vitest"
-import {shallowMount } from "@vue/test-utils"
-import PlayerTd from "../PlayerTd.vue"
-
+ * @vitest-environment happy-dom
+ */
+import { describe, it, expect } from "vitest";
+import { shallowMount } from "@vue/test-utils";
+import PlayerTd from "../PlayerTd.vue";
 
 describe("Player Td", () => {
   it("renders the first and last name", () => {
@@ -12,11 +11,11 @@ describe("Player Td", () => {
       props: {
         player: {
           firstName: "Stefan",
-          lastName: "Didone"
-        }
-      }
+          lastName: "Didone",
+        },
+      },
     });
     expect(wrapper.html()).toContain("Stefan");
     expect(wrapper.html()).toContain("Didone");
-  })
-})
+  });
+});

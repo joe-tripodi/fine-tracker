@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect } from "vitest";
 
-import { mount, shallowMount } from '@vue/test-utils'
-import PlayersFines from '../PlayerFines.vue'
+import { mount, shallowMount } from "@vue/test-utils";
+import PlayersFines from "../PlayerFines.vue";
 import { createVuetify } from "vuetify";
-import FineCard from "../../components/FineCard.vue"
+import FineCard from "../../components/FineCard.vue";
 
 const vuetify = createVuetify();
 
@@ -13,15 +13,15 @@ const Database = class {
       firstName: "Stefan",
       lastName: "Didone",
       shirtNumber: 8,
-      id: 2
+      id: 2,
     },
     {
       firstName: "Joe",
       lastName: "Poll",
       shirtNumber: 3,
-      id: 1
+      id: 1,
     },
-  ]
+  ];
 
   fines = [
     {
@@ -58,10 +58,10 @@ const Database = class {
       dateCreated: new Date(),
       paid: false,
       void: false,
-      credited: false
-    }
-  ]
-  
+      credited: false,
+    },
+  ];
+
   async getAllUnpaid() {
     return this.fines.filter((fine) => fine.paid == false);
   }
@@ -74,38 +74,38 @@ const Database = class {
     return this.players;
   }
 
-  async getAllClubFines(){
+  async getAllClubFines() {
     return [];
   }
 
   async getAllPlayersNameAndIds() {
     return this.players;
   }
-}
+};
 
 describe("Players Fines", () => {
   it("exists", () => {
     const wrapper = shallowMount(PlayersFines, {
       global: {
         provide: {
-          database: new Database()
+          database: new Database(),
         },
         stubs: ["fa"],
-        plugins: [vuetify]
-      }
+        plugins: [vuetify],
+      },
     });
     expect(wrapper.exists()).toBe(true);
-  })
+  });
 
   it("renders all unpaid fines in the database", async () => {
     const wrapper = mount(PlayersFines, {
       global: {
         provide: {
-          database: new Database()
+          database: new Database(),
         },
         stubs: ["fa"],
         plugins: [vuetify],
-      }
+      },
     });
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
@@ -116,24 +116,24 @@ describe("Players Fines", () => {
     expect(wrapper.html()).toContain("Late to gameday");
     expect(wrapper.html()).toContain("$50");
     expect(wrapper.html()).toContain("Stefan Didone");
-  })
-})
+  });
+});
 
 describe("Floating add button", () => {
   it("contains an add button", async () => {
     const wrapper = mount(PlayersFines, {
       global: {
         provide: {
-          database: new Database()
+          database: new Database(),
         },
         stubs: ["fa"],
-        plugins: [vuetify,]
-      }
+        plugins: [vuetify],
+      },
     });
 
     await wrapper.vm.$nextTick();
     await wrapper.vm.$nextTick();
 
     expect(wrapper.find("#floating-add").exists()).toBeTruthy();
-  })
-})
+  });
+});

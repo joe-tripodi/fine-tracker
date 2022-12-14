@@ -1,9 +1,9 @@
 /*
-* @vitest-environment happy-dom
-*/
-import { describe, it, expect } from "vitest"
-import { mount } from "@vue/test-utils"
-import FineCard from "../FineCard.vue"
+ * @vitest-environment happy-dom
+ */
+import { describe, it, expect } from "vitest";
+import { mount } from "@vue/test-utils";
+import FineCard from "../FineCard.vue";
 import { createVuetify } from "vuetify";
 
 const vuetify = createVuetify();
@@ -26,12 +26,12 @@ describe("Player Card", () => {
         },
       },
       global: {
-        plugins: [vuetify]
-      }
+        plugins: [vuetify],
+      },
     });
 
     expect(wrapper.html()).toContain("Late to training");
     expect(wrapper.html()).toContain("$10");
     expect(wrapper.html()).toContain("Joe Poll");
-  })
-})
+  });
+});

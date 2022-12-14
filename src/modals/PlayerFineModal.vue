@@ -2,38 +2,57 @@
   <v-dialog @click:outside="close" v-model="showModal">
     <v-card>
       <v-card-title>Fine a player</v-card-title>
-      <v-card-text class="text-body-2 font-italic" wrap>You can select a club fine to pre-fill the Reason and $ fields</v-card-text>
+      <v-card-text class="text-body-2 font-italic" wrap
+        >You can select a club fine to pre-fill the Reason and $
+        fields</v-card-text
+      >
       <v-card-text>
         <v-select
           v-model="selectedFine"
-          variant="solo" 
+          variant="solo"
           label="A list of club fines"
           item-title="reason"
           item-value="reason"
           :items="clubFines"
           return-object
-          >
+        >
         </v-select>
-        <v-text-field v-model="fineReason" required variant="solo" label="Reason"></v-text-field>
-        <v-text-field v-model="fineAmount" required variant="solo" label="$"></v-text-field>
+        <v-text-field
+          v-model="fineReason"
+          required
+          variant="solo"
+          label="Reason"
+        ></v-text-field>
+        <v-text-field
+          v-model="fineAmount"
+          required
+          variant="solo"
+          label="$"
+        ></v-text-field>
         <v-select
           v-model="selectedPlayers"
           item-title="fullName"
-          item-value="id" 
-          :items="players" 
-          color="red" 
-          required 
-          variant="solo" 
-          ounded 
-          multiple 
-          label="Player(s)" 
-          chips 
+          item-value="id"
+          :items="players"
+          color="red"
+          required
+          variant="solo"
+          ounded
+          multiple
+          label="Player(s)"
+          chips
           clearable
           return-object
-          >
+        >
         </v-select>
         <v-card-actions>
-          <v-btn @click.prevent="finePlayers" depressed rounded variant="flat" color="primary">
+          <v-btn
+            @click.prevent="finePlayers"
+            depressed
+            rounded
+            variant="flat"
+            color="primary"
+          >
             SUBMIT
           </v-btn>
         </v-card-actions>
@@ -43,22 +62,22 @@
 </template>
 
 <script setup>
-import { ref } from '@vue/reactivity';
-import { inject, onMounted } from 'vue';
-import { watch } from 'vue';
+import { ref } from "vue";
+import { inject, onMounted } from "vue";
+import { watch } from "vue";
 
-const database = inject('database');
+const database = inject("database");
 
 const props = defineProps({
   isActive: {
     type: Boolean,
     default: false,
-  }
-})
+  },
+});
 
 const emit = defineEmits({
   closeFineAPlayerModal: null,
-})
+});
 
 const showModal = ref(props.isActive);
 
@@ -69,26 +88,29 @@ const selectedFine = ref("");
 const fineReason = ref("");
 const fineAmount = ref("");
 
-onMounted( async () => {
+onMounted(async () => {
   players.value = await database.getAllPlayersNameAndIds();
   players.value.forEach((player) => {
     player.fullName = `${player.firstName} ${player.lastName}`;
-  })
+  });
   clubFines.value = await database.getAllClubFines();
-})
+});
 
-watch(() => props.isActive, async(newValue) => {
-  showModal.value = newValue;
-})
+watch(
+  () => props.isActive,
+  async (newValue) => {
+    showModal.value = newValue;
+  }
+);
 
-watch(selectedFine, async(newValue) => {
-  if(newValue != null){
+watch(selectedFine, async (newValue) => {
+  if (newValue != null) {
     fineReason.value = newValue.reason;
     fineAmount.value = newValue.amount;
   }
-})
+});
 
-function finePlayers(){
+function finePlayers() {
   if (!isFormValid()) return;
   let playerFines = [];
   selectedPlayers.value.forEach((player) => {
@@ -101,37 +123,37 @@ function finePlayers(){
       paid: false,
       playerId: player.id,
       playerName: `${player.firstName} ${player.lastName}`,
-      void: false
-    }
+      void: false,
+    };
     playerFines.push(playerFine);
-  })
+  });
   database.addPlayerFines(playerFines);
   clearForm();
   emit("closeFineAPlayerModal", true);
 }
 
-function isFormValid(){
+function isFormValid() {
   let validForm = true;
-  if(fineReason.value.length == 0){
+  if (fineReason.value.length == 0) {
     validForm = false;
   }
-  if(selectedPlayers.value.length == 0){
+  if (selectedPlayers.value.length == 0) {
     validForm = false;
   }
-  if(isNaN(+fineAmount.value) || +fineAmount.value <= 0){
+  if (isNaN(+fineAmount.value) || +fineAmount.value <= 0) {
     validForm = false;
   }
   return validForm;
 }
 
-function clearForm(){
+function clearForm() {
   selectedFine.value = "";
   fineAmount.value = "";
   fineReason.value = "";
   selectedPlayers.value = [];
 }
 
-function close(){
+function close() {
   clearForm();
   emit("closeFineAPlayerModal");
 }

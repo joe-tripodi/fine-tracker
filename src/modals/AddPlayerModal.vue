@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" :class="{'is-active': isActive}">
+  <div class="modal" :class="{ 'is-active': isActive }">
     <div @click="closeModal" class="modal-background"></div>
 
     <div class="modal-card">
@@ -9,13 +9,18 @@
       </header>
 
       <section class="modal-card-body">
-
         <div class="field">
           <div class="control has-icons-left">
             <span class="icon is-small is-left">
               <fa icon="fas fa-pen"></fa>
             </span>
-            <input id="firstName" v-model="firstName" class="input" type="text" placeholder="First Name">
+            <input
+              id="firstName"
+              v-model="firstName"
+              class="input"
+              type="text"
+              placeholder="First Name"
+            />
           </div>
         </div>
 
@@ -24,7 +29,13 @@
             <span class="icon is-small is-left">
               <fa icon="fas fa-pen"></fa>
             </span>
-            <input id="lastName" v-model="lastName" class="input" type="text" placeholder="Last Name">
+            <input
+              id="lastName"
+              v-model="lastName"
+              class="input"
+              type="text"
+              placeholder="Last Name"
+            />
           </div>
         </div>
 
@@ -33,10 +44,16 @@
             <span class="icon is-small is-left">
               <fa icon="fas fa-hashtag"></fa>
             </span>
-            <input @keyup.enter="addPlayer" id="shirtNumber" v-model="shirtNumber" class="input" type="number" placeholder="Shirt No." >
+            <input
+              @keyup.enter="addPlayer"
+              id="shirtNumber"
+              v-model="shirtNumber"
+              class="input"
+              type="number"
+              placeholder="Shirt No."
+            />
           </div>
         </div>
-
       </section>
 
       <footer class="modal-card-foot">
@@ -45,7 +62,9 @@
             <button @click="closeModal" class="button cancel">Cancel</button>
           </div>
           <div class="control">
-            <button @click="addPlayer" class="button  is-success add">Add</button>
+            <button @click="addPlayer" class="button is-success add">
+              Add
+            </button>
           </div>
         </div>
       </footer>
@@ -64,35 +83,39 @@ const props = defineProps({
   isActive: {
     type: Boolean,
     default: false,
-  }
-})
+  },
+});
 
 const emit = defineEmits({
   closeAddPlayerModal: null,
-})
+});
 
-const database = inject('database');
+const database = inject("database");
 const shirtNumber = ref();
-const firstName = ref('');
-const lastName = ref('');
+const firstName = ref("");
+const lastName = ref("");
 const showSnackbar = ref(false);
-const snackbarText = ref('');
+const snackbarText = ref("");
 
-function cleanTheForm(){
+function cleanTheForm() {
   shirtNumber.value = null;
   firstName.value = "";
   lastName.value = "";
 }
 
-function closeModal(){
+function closeModal() {
   cleanTheForm();
   emit("closeAddPlayerModal", false);
 }
 
-async function addPlayer(){
+async function addPlayer() {
   let playerDoesNotExist = !(await database.playerExists(shirtNumber.value));
-  if(isValidForm() && playerDoesNotExist){
-    await database.addPlayer(firstName.value, lastName.value, +shirtNumber.value);
+  if (isValidForm() && playerDoesNotExist) {
+    await database.addPlayer(
+      firstName.value,
+      lastName.value,
+      +shirtNumber.value
+    );
     cleanTheForm();
     emit("closeAddPlayerModal", true);
   } else {
@@ -100,18 +123,17 @@ async function addPlayer(){
   }
 }
 
-function isValidForm(){
+function isValidForm() {
   let validForm = true;
-  if(firstName.value.length == 0){
+  if (firstName.value.length == 0) {
     validForm = false;
   }
-  if(lastName.value.length == 0){
+  if (lastName.value.length == 0) {
     validForm = false;
   }
-  if(isNaN(+shirtNumber.value) || +shirtNumber.value <= 0){
+  if (isNaN(+shirtNumber.value) || +shirtNumber.value <= 0) {
     validForm = false;
   }
   return validForm;
 }
-
 </script>
