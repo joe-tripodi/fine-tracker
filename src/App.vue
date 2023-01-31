@@ -5,6 +5,9 @@
     aria-label="main-navigation"
   >
     <div class="navbar-brand">
+      <a class="navbar-item" @click="navigateToHomeAndCloseBurgerMenu()">
+        <v-icon size="large" icon="mdi-home"></v-icon>
+      </a>
       <a
         role="button"
         @click="toggleIsActive()"
@@ -65,8 +68,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const active = ref(false);
 
 function toggleIsActive() {
@@ -76,6 +81,12 @@ function toggleIsActive() {
 function closeBurgerMenu() {
   active.value = false;
 }
+
+function navigateToHomeAndCloseBurgerMenu(){
+  active.value = false;
+  router.push("/home")
+}
+
 </script>
 
 <style>
