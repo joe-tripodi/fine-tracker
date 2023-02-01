@@ -14,6 +14,7 @@
           item-title="reason"
           item-value="reason"
           :items="clubFines"
+          :menu-props="{location: 'top'}"
           return-object
         >
         </v-select>
@@ -37,7 +38,9 @@
           color="red"
           required
           variant="solo"
-          ounded
+          rounded
+          density="compact"
+          :menu-props="{location: 'top'}"
           multiple
           label="Player(s)"
           chips
