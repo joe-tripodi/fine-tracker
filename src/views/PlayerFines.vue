@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, ref, computed } from "vue";
+import { inject, onMounted, ref } from "vue";
 import { useAuthentication } from "../composables/authentication";
 import FineCard from "../components/FineCard.vue";
 import PlayerFineModal from "../modals/PlayerFineModal.vue";
@@ -60,7 +60,10 @@ const allPaidFines = ref([]);
 
 onMounted(async () => {
   database.getAllUnpaidFines().then((res) => {
-    allUnpaidFines.value = res;
+    allUnpaidFines.value = res.sort((a, b) => {
+      if (a.fineDate < b.fineDate) return -1
+      else return 1
+    });
   });
   database.getAllPaidFines().then((res) => {
     allPaidFines.value = res;
@@ -71,7 +74,10 @@ async function closeFineAPlayerModal(fetchNewFines) {
   addplayerFineModalIsActive.value = false;
   if (fetchNewFines) {
     database.getAllUnpaidFines().then((res) => {
-      allUnpaidFines.value = res;
+      allUnpaidFines.value = res.sort((a, b) => {
+      if (a.fineDate < b.fineDate) return -1
+      else return 1
+    });
     });
     database.getAllPaidFines().then((res) => {
       allPaidFines.value = res;
