@@ -33,16 +33,7 @@
         <v-card-actions>
           <div class="mx-auto">
             <v-btn
-              @click.prevent="voidFine"
-              depressed
-              variant="flat"
-              color="error"
-            >
-              void
-            </v-btn>
-            <v-btn
               @click.prevent="saveFine"
-              depressed
               variant="flat"
               color="success"
             >
@@ -50,11 +41,17 @@
             </v-btn>
             <v-btn
               @click.prevent="finePaid"
-              depressed
               variant="flat"
               color="primary"
             >
               paid
+            </v-btn>
+            <v-btn
+              @click.prevent="voidFine"
+              variant="flat"
+              color="error"
+            >
+              void
             </v-btn>
           </div>
         </v-card-actions>
