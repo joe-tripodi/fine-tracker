@@ -19,6 +19,12 @@
         >
         </v-select>
         <v-text-field
+        v-model="fineDate"
+        hint="Date"
+        label="Date"
+        type="date"
+      ></v-text-field>
+        <v-text-field
           v-model="fineReason"
           required
           variant="solo"
@@ -90,6 +96,7 @@ const selectedPlayers = ref([]);
 const selectedFine = ref("");
 const fineReason = ref("");
 const fineAmount = ref("");
+const fineDate = ref(new Date().toISOString().split('T')[0]);
 
 onMounted(async () => {
   players.value = await database.getAllPlayersNameAndIds();
@@ -127,6 +134,7 @@ function finePlayers() {
       playerId: player.id,
       playerName: `${player.firstName} ${player.lastName}`,
       void: false,
+      fineDate: fineDate.value,
     };
     playerFines.push(playerFine);
   });
@@ -153,6 +161,7 @@ function clearForm() {
   selectedFine.value = "";
   fineAmount.value = "";
   fineReason.value = "";
+  fineDate.value = undefined;
   selectedPlayers.value = [];
 }
 

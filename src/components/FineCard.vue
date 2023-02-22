@@ -23,14 +23,14 @@ const props = defineProps({
 });
 
 const fineDate = computed(() => {
-  return new Date(props.fine.dateCreated.seconds * 1000).toDateString();
+  return new Date(props.fine.fineDate).toDateString();
 });
 
 const fineColor = computed(() => {
   if (props.fine.paid) return "success";
   let dateDifference = Math.abs(
     new Date().getDate() -
-      new Date(props.fine.dateCreated.seconds * 1000).getDate()
+      new Date(props.fine.fineDate).getDate()
   );
   if (dateDifference > 7) return "red";
   return "blue";
