@@ -35,29 +35,26 @@
             <v-btn
               @click.prevent="voidFine"
               depressed
-              icon
               variant="flat"
               color="error"
             >
-              <v-icon icon="mdi-trash-can"></v-icon>
+              void
             </v-btn>
             <v-btn
               @click.prevent="saveFine"
               depressed
-              icon
               variant="flat"
               color="success"
             >
-              <v-icon icon="mdi-floppy"></v-icon>
+              save
             </v-btn>
             <v-btn
               @click.prevent="finePaid"
               depressed
-              icon
               variant="flat"
               color="primary"
             >
-              <v-icon icon="mdi-cash"></v-icon>
+              paid
             </v-btn>
           </div>
         </v-card-actions>
