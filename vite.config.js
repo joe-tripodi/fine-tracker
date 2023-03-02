@@ -25,4 +25,7 @@ export default defineConfig({
       inline: ["vuetify"],
     },
   },
+  build: {
+    chunkSizeWarningLimit: 1600,
+  },
 });
