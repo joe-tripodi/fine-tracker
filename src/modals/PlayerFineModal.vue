@@ -20,7 +20,6 @@
         </v-select>
         <v-text-field
         v-model="fineDate"
-        hint="Date"
         label="Date"
         type="date"
       ></v-text-field>
@@ -96,7 +95,7 @@ const selectedPlayers = ref([]);
 const selectedFine = ref("");
 const fineReason = ref("");
 const fineAmount = ref("");
-const fineDate = ref(new Date().toISOString().split('T')[0]);
+const fineDate = ref((new Date()).toISOString().split('T')[0]);
 
 onMounted(async () => {
   players.value = await database.getAllPlayersNameAndIds();
