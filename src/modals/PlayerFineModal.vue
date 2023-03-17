@@ -9,6 +9,8 @@
       <v-card-text>
         <v-select
           v-model="selectedFine"
+          rounded
+          density="compact"
           variant="solo"
           label="A list of club fines"
           item-title="reason"
@@ -22,6 +24,8 @@
         v-model="fineDate"
         label="Date"
         type="date"
+        variant="solo"
+        :rules="[v => !!v || 'Required']"
       ></v-text-field>
         <v-text-field
           v-model="fineReason"
@@ -40,7 +44,6 @@
           item-title="fullName"
           item-value="id"
           :items="players"
-          color="red"
           required
           variant="solo"
           rounded
@@ -153,6 +156,9 @@ function isFormValid() {
   if (isNaN(+fineAmount.value) || +fineAmount.value <= 0) {
     validForm = false;
   }
+  if (isNaN(Date.parse(fineDate.value)) == true) {
+    validForm = false;
+  }
   return validForm;
 }
 
@@ -160,7 +166,7 @@ function clearForm() {
   selectedFine.value = "";
   fineAmount.value = "";
   fineReason.value = "";
-  fineDate.value = undefined;
+  fineDate.value = (new Date()).toISOString().split('T')[0];
   selectedPlayers.value = [];
 }
 
