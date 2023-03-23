@@ -28,11 +28,8 @@ const fineDate = computed(() => {
 
 const fineColor = computed(() => {
   if (props.fine.paid) return "success";
-  let dateDifference = Math.abs(
-    new Date().getDate() -
-      new Date(props.fine.fineDate).getDate()
-  );
-  if (dateDifference > 7) return "red";
+  let dateDifference = Math.abs( new Date().getTime() - new Date(props.fine.fineDate).getTime());
+  if (dateDifference > 604800000) return "red";
   return "blue";
 });
 </script>
