@@ -27,6 +27,14 @@
       </v-col>
       <v-col cols="12" align="center">
         <v-btn
+          @click="router.push('/statistics')"
+          color="error"
+          width="50%"
+          height=40
+        >Statistics</v-btn>
+      </v-col>
+      <v-col cols="12" align="center">
+        <v-btn
           @click="router.push('/login')"
           color="black"
           width="50%"
