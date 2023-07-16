@@ -16,17 +16,17 @@
           item-title="reason"
           item-value="reason"
           :items="clubFines"
-          :menu-props="{location: 'top'}"
+          :menu-props="{ location: 'top' }"
           return-object
         >
         </v-select>
         <v-text-field
-        v-model="fineDate"
-        label="Date"
-        type="date"
-        variant="solo"
-        :rules="[v => !!v || 'Required']"
-      ></v-text-field>
+          v-model="fineDate"
+          label="Date"
+          type="date"
+          variant="solo"
+          :rules="[v => !!v || 'Required']"
+        ></v-text-field>
         <v-text-field
           v-model="fineReason"
           required
@@ -48,7 +48,7 @@
           variant="solo"
           rounded
           density="compact"
-          :menu-props="{location: 'top'}"
+          :menu-props="{ location: 'top' }"
           multiple
           label="Player(s)"
           chips
@@ -128,7 +128,7 @@ function finePlayers() {
   selectedPlayers.value.forEach((player) => {
     let playerFine = {
       reason: fineReason.value,
-      amount: fineAmount.value,
+      amount: parseInt(fineAmount.value),
       doubleFactor: 0,
       dateCreated: new Date(),
       credited: false,

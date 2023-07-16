@@ -60,6 +60,7 @@ function totalOwed(playerFines) {
   padding: 10px;
   margin-bottom: 5px;
 }
+
 .fineItem {
   display: flex;
   justify-content: space-between;
