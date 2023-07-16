@@ -35,6 +35,14 @@
       </v-col>
       <v-col cols="12" align="center">
         <v-btn
+          @click="router.push('/finesbyplayer')"
+          color="black"
+          width="50%"
+          height=40
+          >Fines By Player</v-btn>
+      </v-col>
+      <v-col cols="12" align="center">
+        <v-btn
           @click="router.push('/login')"
           color="black"
           width="50%"

@@ -36,6 +36,11 @@ const routes = [
     name: "login",
     component: () => import("../views/LoginView.vue"),
   },
+  {
+    path: "/finesbyplayer",
+    name: "finesbyplayer",
+    component: () => import("../views/FinesByPlayer.vue"),
+  },
 ];
 
 const router = createRouter({

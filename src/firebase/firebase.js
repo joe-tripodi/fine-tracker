@@ -98,6 +98,25 @@ export default {
     })
     return unpaidFines;
   },
+  groupUnpaidFinesByPlayer: async () => {
+    let unpaidFines = [];
+    const q = query(collection(database, "fines"), where("paid", "==", false, ), where("void", "==", false));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      let fine = doc.data();
+      fine.id = doc.id;
+      unpaidFines.push(fine);
+    })
+    let finesByPlayer = {};
+    unpaidFines.forEach((fine) => {
+      if (finesByPlayer[fine.playerId] === undefined) {
+        finesByPlayer[fine.playerId] = [fine];
+      } else {
+        finesByPlayer[fine.playerId].push(fine);
+      }
+    });
+    return finesByPlayer;
+  },
   getAllPaidFines: async () => {
     let paidFines = [];
     const q = query(collection(database, "fines"), where("paid", "==", true, ), where("void", "==", false));

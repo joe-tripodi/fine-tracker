@@ -56,6 +56,12 @@
         <RouterLink
           @click="closeBurgerMenu()"
           class="navbar-item has-text-black"
+          to="/finesbyplayer"
+          >Fines By Player</RouterLink
+        >
+        <RouterLink
+          @click="closeBurgerMenu()"
+          class="navbar-item has-text-black"
           to="/login"
           >Admin login</RouterLink
         >
